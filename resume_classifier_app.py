@@ -11,23 +11,23 @@ import spacy
 import unicodedata
 import matplotlib.pyplot as plt
 from spacy.matcher import PhraseMatcher
-import subprocess
-import sys
+from spacy.cli import download
 
 nltk.download("stopwords")
 nltk.download("wordnet")
 nltk.download("punkt_tab")
 
-# Function to ensure spaCy model is downloaded
-def download_spacy_model(model_name):
+
+def load_spacy_model(model_name="en_core_web_sm"):
     try:
-        spacy.load(model_name)
+        return spacy.load(model_name)
     except OSError:
-        print(f"Downloading spaCy model: {model_name}...")
-        subprocess.check_call([sys.executable, "-m", "spacy", "download", model_name])
+        print(f"Downloading {model_name}...")
+        download(model_name)
+        return spacy.load(model_name)
 
-download_spacy_model("en_core_web_sm")
 
+nlp = load_spacy_model()
 
 
 tfidf = joblib.load("Resume_Classification_Tokenizer_Tfidf.joblib")
@@ -102,7 +102,6 @@ if prediction_button:
    
    
    
-   nlp = spacy.load("en_core_web_sm")
    
    doc1 = nlp(job_description)
    doc2 = nlp(user_resume_input)
@@ -182,6 +181,7 @@ if prediction_button:
 
    
        
+
 
 
 
