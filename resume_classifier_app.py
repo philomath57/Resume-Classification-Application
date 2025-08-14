@@ -12,19 +12,23 @@ import unicodedata
 import matplotlib.pyplot as plt
 from spacy.matcher import PhraseMatcher
 from spacy.cli import download
+from spacy.util import is_package
 
 nltk.download("stopwords")
 nltk.download("wordnet")
 nltk.download("punkt_tab")
 
 
-def load_spacy_model(model_name="en_core_web_sm"):
-    try:
-        return spacy.load(model_name)
-    except OSError:
-        print(f"Downloading {model_name}...")
-        download(model_name)
-        return spacy.load(model_name)
+@st.cache_resource(show_spinner=False)
+def load_spacy_model():
+    """Load spaCy model with automatic download if needed"""
+    model_name = "en_core_web_sm"
+    
+    if not is_package(model_name):
+        with st.spinner(f"Downloading {model_name} model... This may take a minute."):
+            download(model_name)
+    
+    return spacy.load(model_name)
 
 
 nlp = load_spacy_model()
@@ -181,6 +185,7 @@ if prediction_button:
 
    
        
+
 
 
 
