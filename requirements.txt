@@ -7,3 +7,5 @@ joblib
 scikit-learn
 xgboost
 unicodedata2
+sys
+subprocess
