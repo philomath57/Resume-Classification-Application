@@ -7,4 +7,5 @@ joblib
 scikit-learn
 xgboost
 unicodedata2
+en-core-web-sm
 
