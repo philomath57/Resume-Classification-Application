@@ -19,18 +19,11 @@ nltk.download("wordnet")
 nltk.download("punkt_tab")
 
 
-@st.cache_resource(show_spinner=False)
+@st.cache_resource
 def load_spacy_model():
-    """Load spaCy model with automatic download if needed"""
-    model_name = "en_core_web_sm"
-    
-    if not is_package(model_name):
-        with st.spinner(f"Downloading {model_name} model... This may take a minute."):
-            download(model_name)
-    
-    return spacy.load(model_name)
+    return spacy.load("en_core_web_sm")
 
-
+# Load model once
 nlp = load_spacy_model()
 
 
@@ -185,6 +178,7 @@ if prediction_button:
 
    
        
+
 
 
 
