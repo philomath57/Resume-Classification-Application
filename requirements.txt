@@ -1,6 +1,6 @@
 streamlit
 nltk
-spacy
+spacy>=3.0.0
 lime
 matplotlib
 joblib
